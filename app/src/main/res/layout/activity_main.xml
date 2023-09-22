@@ -1,69 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <ImageView
-        android:id="@+id/iconUsername"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="8dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintBottom_toBottomOf="@+id/etUsername"
-        app:layout_constraintEnd_toStartOf="@+id/etUsername"
-        app:layout_constraintTop_toTopOf="@+id/etUsername"
-        app:layout_constraintVertical_bias="1.0" />
+        android:id="@+id/imageViewLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"/>
 
     <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="0dp"
+        android:id="@+id/username"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_below="@id/imageViewLogo"
         android:layout_marginTop="16dp"
-        android:background="#FFFFFF"
-        android:paddingStart="32dp"
-        android:paddingEnd="8dp"/>
-
-    <ImageView
-        android:id="@+id/iconPassword"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:src="@mipmap/ic_launcher"
-        app:layout_constraintEnd_toStartOf="@+id/etPassword"
-        app:layout_constraintTop_toTopOf="@+id/etPassword"
-        app:layout_constraintBottom_toBottomOf="@+id/etPassword"
-        android:layout_marginEnd="8dp"/>
+        android:hint="Tên người dùng"
+        android:inputType="text"
+        android:padding="12dp"/>
 
     <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="0dp"
+        android:id="@+id/password"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:layout_below="@id/username"
+        android:layout_marginTop="8dp"
+        android:hint="Mật khẩu"
         android:inputType="textPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etUsername"
-        android:layout_marginTop="16dp"
-        android:background="#FFFFFF"
-        android:paddingStart="32dp"
-        android:paddingEnd="8dp"/>
+        android:padding="12dp" />
 
     <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="0dp"
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/password"
         android:layout_marginTop="16dp"
-        android:background="#D68D05"
-        android:text="Login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etPassword" />
+        android:text="Đăng nhập" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
