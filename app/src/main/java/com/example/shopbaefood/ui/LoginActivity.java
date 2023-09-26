@@ -2,36 +2,59 @@ package com.example.shopbaefood.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.example.shopbaefood.R;
-import com.example.shopbaefood.model.dto.AccountToken;
 import com.example.shopbaefood.model.dto.ApiResponse;
 import com.example.shopbaefood.model.dto.LoginResponse;
 import com.example.shopbaefood.service.ApiService;
+import com.example.shopbaefood.util.Notification;
+import com.example.shopbaefood.util.UtilApp;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-
-public class MainActivity extends AppCompatActivity {
-
-    Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.52.218:8080/ShopbaeFoodApi/").addConverterFactory(GsonConverterFactory.create()).build();
-    ApiService apiService = retrofit.create(ApiService.class);
-
+public class LoginActivity extends AppCompatActivity {
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.login);
 
-        Button submit = findViewById(R.id.buttonLogin);
+        intent= new Intent();
+        loginClick();
+        forgotClick();
+        registerClick();
+
+    }
+
+    private void registerClick() {
+        TextView register= findViewById(R.id.register);
+        register.setOnClickListener(v->{
+            intent.setClass(this, RegisterActivity.class);
+            startActivity(intent);
+        });
+    }
+
+    private void forgotClick() {
+        TextView forgotView= findViewById(R.id.forgotpass);
+        forgotView.setOnClickListener(v->{
+            EditText username= findViewById(R.id.username);
+            intent.setClass(this,ForgotActivity.class);
+            intent.putExtra("username",username.getText().toString());
+            startActivity(intent);
+        });
+    }
+
+    private void loginClick() {
+        ApiService apiService = UtilApp.retrofitCF().create(ApiService.class);
+        Button submit = findViewById(R.id.button);
         submit.setOnClickListener(v -> {
             EditText userName = findViewById(R.id.username);
             EditText passWord = findViewById(R.id.password);
@@ -40,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             login.setUserName(userName.getText().toString());
             login.setPassword(passWord.getText().toString());
 
-            Call<ApiResponse> call = apiService.call(login);
+            Call<ApiResponse> call = apiService.login(login);
             call.enqueue(new Callback<ApiResponse>() {
                 @Override
                 public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
@@ -48,14 +71,15 @@ public class MainActivity extends AppCompatActivity {
                         ApiResponse apiResponse = response.body();
                         if(apiResponse.getData()!=null){
                             Log.d("login",response.body().getData().toString());
-                            Toast.makeText(v.getContext(),"login success", Toast.LENGTH_SHORT).show();
+                            Notification.showToast(v,"LoginSuccess");
                         }else {
                             Log.d("login",response.body().getMessage());
-                            Toast.makeText(v.getContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                            Notification.showToast(v,response.body().getMessage());
                         }
 
                     }else {
                         Log.d("login","sai");
+                        Notification.showToast(v,"sai tk hoặc mk");
                     }
 
 
@@ -65,10 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 public void onFailure(Call<ApiResponse> call, Throwable t) {
                     Log.d("t",t.getMessage().toString());
                     Log.d("login", "fail");
+                    Notification.showToast(v,"server lỗi");
                 }
             });
         });
-
-
     }
 }
