@@ -54,10 +54,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginClick() {
         ApiService apiService = UtilApp.retrofitCF().create(ApiService.class);
-        Button submit = findViewById(R.id.button);
+        Button submit = findViewById(R.id.sendOtp);
         submit.setOnClickListener(v -> {
             EditText userName = findViewById(R.id.username);
-            EditText passWord = findViewById(R.id.password);
+            EditText passWord = findViewById(R.id.otp);
 
             LoginResponse login = new LoginResponse();
             login.setUserName(userName.getText().toString());
