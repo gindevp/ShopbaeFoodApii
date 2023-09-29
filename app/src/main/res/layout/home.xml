@@ -8,11 +8,11 @@
     tools:context=".ui.HomeActivity">
 
     <Button
-        android:id="@+id/findFoodButton"
+        android:id="@+id/logout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="260dp"
-        android:text="Tìm Đồ Ăn"
+        android:text="Đăng Xuất"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/findFoodButton" />
+        app:layout_constraintTop_toBottomOf="@id/logout" />
 
     <FrameLayout
         android:id="@+id/fragment_nav_home"

@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     private void forgotClick() {
         TextView forgotView = findViewById(R.id.forgotpass);
         forgotView.setOnClickListener(v -> {
-            EditText username = findViewById(R.id.username);
+            EditText username = findViewById(R.id.otpConfirm);
             intent.setClass(this, ForgotActivity.class);
             intent.putExtra("username", username.getText().toString());
             startActivity(intent);
@@ -60,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         ApiService apiService = UtilApp.retrofitCF().create(ApiService.class);
         Button submit = findViewById(R.id.send);
         submit.setOnClickListener(v -> {
-            EditText userName = findViewById(R.id.username);
+            EditText userName = findViewById(R.id.otpConfirm);
             EditText passWord = findViewById(R.id.password);
 
             LoginResponse login = new LoginResponse();
